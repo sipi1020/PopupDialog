@@ -27,8 +27,23 @@
 import Foundation
 import UIKit
 
+public class PopupPosition:NSObject{
+    var anchorPoint:CGPoint?
+    var width:CGFloat?
+
+    public init(anchorPoint: CGPoint?, width: CGFloat? = nil) {
+        self.anchorPoint = anchorPoint
+        self.width = width
+    }
+}
+
 /// The main view of the popup dialog
 final public class PopupDialogContainerView: UIView {
+    
+    //MARK: - Position
+    
+    fileprivate var popupPosition:PopupPosition?
+    
 
     // MARK: - Appearance
 
@@ -146,8 +161,9 @@ final public class PopupDialogContainerView: UIView {
 
     // MARK: - Initializers
     
-    internal init(frame: CGRect, preferredWidth: CGFloat) {
+    internal init(frame: CGRect, preferredWidth: CGFloat, popupPosition:PopupPosition? = nil) {
         self.preferredWidth = preferredWidth
+        self.popupPosition = popupPosition
         super.init(frame: frame)
         setupViews()
     }
@@ -168,7 +184,7 @@ final public class PopupDialogContainerView: UIView {
         // Layout views
         let views = ["shadowContainer": shadowContainer, "container": container, "stackView": stackView]
         var constraints = [NSLayoutConstraint]()
-
+         
         // Shadow container constraints
         if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
             let metrics = ["preferredWidth": preferredWidth]
@@ -176,8 +192,35 @@ final public class PopupDialogContainerView: UIView {
         } else {
             constraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-(>=10,==20@900)-[shadowContainer(<=340,>=300)]-(>=10,==20@900)-|", options: [], metrics: nil, views: views)
         }
-        constraints += [NSLayoutConstraint(item: shadowContainer, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0)]
-        centerYConstraint = NSLayoutConstraint(item: shadowContainer, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0)
+                
+        if let position = popupPosition {
+            if let anchor = position.anchorPoint {
+                let screenWidth = UIScreen.main.bounds.width
+                let screenHeight = UIScreen.main.bounds.height
+                
+                if anchor.x < screenWidth/2 {
+                    constraints += [NSLayoutConstraint(item: shadowContainer, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: anchor.x)]
+                } else {
+                    constraints += [NSLayoutConstraint(item: self, attribute: .trailing, relatedBy: .equal, toItem: shadowContainer, attribute: .trailing, multiplier: 1, constant: screenWidth -  anchor.x)]
+                }
+                
+                if anchor.y < screenHeight/2 {
+                    constraints += [NSLayoutConstraint(item: shadowContainer, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: anchor.y)]
+                } else {
+                    constraints += [NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: shadowContainer, attribute: .bottom, multiplier: 1, constant: screenHeight - anchor.y)]
+                }
+            }
+            
+            if let width = position.width{
+                constraints += [NSLayoutConstraint(item: shadowContainer, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: width)]
+            }
+
+        }
+        else{
+            constraints += [NSLayoutConstraint(item: shadowContainer, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0)]
+            
+            centerYConstraint = NSLayoutConstraint(item: shadowContainer, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0)
+        }
         
         if let centerYConstraint = centerYConstraint {
             constraints.append(centerYConstraint)

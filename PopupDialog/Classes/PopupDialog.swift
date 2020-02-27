@@ -63,6 +63,8 @@ final public class PopupDialog: UIViewController {
 
     /// Keyboard height
     internal var keyboardHeight: CGFloat?
+    
+    fileprivate var popupPosition:PopupPosition?
 
     // MARK: Public
 
@@ -116,7 +118,8 @@ final public class PopupDialog: UIViewController {
                   tapGestureDismissal: tapGestureDismissal,
                   panGestureDismissal: panGestureDismissal,
                   hideStatusBar: hideStatusBar,
-                  completion: completion)
+                  completion: completion,
+                  popupPosition: nil)
     }
 
     /*!
@@ -141,12 +144,14 @@ final public class PopupDialog: UIViewController {
         tapGestureDismissal: Bool = true,
         panGestureDismissal: Bool = true,
         hideStatusBar: Bool = false,
-        completion: (() -> Void)? = nil) {
+        completion: (() -> Void)? = nil,
+        popupPosition:PopupPosition? = nil) {
 
         self.viewController = viewController
         self.preferredWidth = preferredWidth
         self.hideStatusBar = hideStatusBar
         self.completion = completion
+        self.popupPosition = popupPosition
         super.init(nibName: nil, bundle: nil)
 
         // Init the presentation manager
@@ -191,7 +196,7 @@ final public class PopupDialog: UIViewController {
 
     /// Replaces controller view with popup view
     public override func loadView() {
-        view = PopupDialogContainerView(frame: UIScreen.main.bounds, preferredWidth: preferredWidth)
+        view = PopupDialogContainerView(frame: UIScreen.main.bounds, preferredWidth: preferredWidth, popupPosition: popupPosition)
     }
 
     public override func viewWillAppear(_ animated: Bool) {
