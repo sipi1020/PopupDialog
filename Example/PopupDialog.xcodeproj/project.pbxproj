@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		24E9C390BE844B9A23A0C537 /* Pods_PopupDialog_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54FBE8B3088FFFE8659C6E87 /* Pods_PopupDialog_Tests.framework */; };
+		389236D024094FBD005172B7 /* PopupDialog in Resources */ = {isa = PBXBuildFile; fileRef = 389236CF24094FBD005172B7 /* PopupDialog */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -52,6 +53,7 @@
 		01A15A32B46CCE17ED5729B1 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		029724732D062654C9C0B8BE /* Pods-PopupDialog_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PopupDialog_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PopupDialog_Tests/Pods-PopupDialog_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		0C9093F7873ABC40A980FF94 /* Pods_PopupDialog_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PopupDialog_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		389236CF24094FBD005172B7 /* PopupDialog */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PopupDialog; path = ../PopupDialog; sourceTree = "<group>"; };
 		54FBE8B3088FFFE8659C6E87 /* Pods_PopupDialog_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PopupDialog_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* PopupDialog_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PopupDialog_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
+				389236CF24094FBD005172B7 /* PopupDialog */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for PopupDialog */,
 				607FACE81AFB9204008FA782 /* Tests */,
@@ -334,6 +337,7 @@
 			files = (
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
+				389236D024094FBD005172B7 /* PopupDialog in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 				C792534B1D33E2C600A0FCA1 /* RatingViewController.xib in Resources */,
 			);

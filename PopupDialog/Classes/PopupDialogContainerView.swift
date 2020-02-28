@@ -35,6 +35,13 @@ public class PopupPosition:NSObject{
         self.anchorPoint = anchorPoint
         self.width = width
     }
+    
+    public init(sourceView:UIView, width: CGFloat? = nil) {
+        let absolute = sourceView.superview!.convert(sourceView.frame, to: nil)
+        self.anchorPoint = CGPoint(x: absolute.origin.x > UIScreen.main.bounds.width/2 ? absolute.maxX : absolute.minX, y: absolute.origin.y > UIScreen.main.bounds.height/2 ? absolute.minY : absolute.maxY)
+        self.width = width
+    }
+
 }
 
 /// The main view of the popup dialog
